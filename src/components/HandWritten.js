@@ -1,4 +1,5 @@
 import React, {useRef, useState} from "react"
+import axios from "axios"
 
 import styles from "./HandWritten.module.scss"
 
@@ -32,6 +33,19 @@ const HandWritten = () => {
     const canvas = canvasRef.current.getContext("2d")
     canvas.clearRect(0, 0, canvasWidth, canvasHeight)
   }
+  
+  const predict = async () => {
+    const base64String = canvasRef.current.toDataURL("image/png")
+    console.log(base64String)
+    
+    const response = await axios.post("http://localhost:8000/api/predict", {
+      "image": base64String
+    }).catch(error => {
+      console.log("an error occurred while predicting")
+    })
+    
+    console.log(response)
+  }
 
   return(
     <div className={styles.wrapper}>
@@ -50,7 +64,7 @@ const HandWritten = () => {
 
       <div className={styles.buttons_wrapper}>
         <button onClick={clearDrawing}>reset</button>
-        <button>predict</button>
+        <button onClick={predict}>predict</button>
       </div>
     </div>
   )
