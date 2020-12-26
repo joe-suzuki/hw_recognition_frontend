@@ -9,6 +9,9 @@ const HandWritten = () => {
   const canvasWidth = 28
   const canvasHeight = 28
 
+  const [predictedLabel, setPredictedLabel] = useState("")
+  const [predictionProb, setPredictionProb] = useState([])
+
   const startDrawing = () => {
     setDrawing(true)
 
@@ -43,7 +46,10 @@ const HandWritten = () => {
     }).catch(error => {
       console.log("an error occurred while predicting")
     })
-    
+
+    setPredictedLabel(response.data.predicted_label)
+    setPredictionProb(response.data.prediction_prob)
+
     console.log(response)
   }
 
@@ -65,6 +71,13 @@ const HandWritten = () => {
       <div className={styles.buttons_wrapper}>
         <button onClick={clearDrawing}>reset</button>
         <button onClick={predict}>predict</button>
+      </div>
+
+      <div>
+        <h2>Predicted: {predictedLabel}</h2>
+        {predictionProb.map((prob, index) => (
+          <p>{index}: {prob}</p>
+        ))}
       </div>
     </div>
   )
