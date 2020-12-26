@@ -1,6 +1,7 @@
 import React, {useRef, useState} from "react"
 import axios from "axios"
 
+import {Bar} from "react-chartjs-2"
 import styles from "./HandWritten.module.scss"
 
 const HandWritten = () => {
@@ -11,6 +12,14 @@ const HandWritten = () => {
 
   const [predictedLabel, setPredictedLabel] = useState("")
   const [predictionProb, setPredictionProb] = useState([])
+
+  const data = {
+    labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+    datasets:[{
+      label: "prediction",
+      data: predictionProb
+    }]
+  }
 
   const startDrawing = () => {
     setDrawing(true)
@@ -75,9 +84,10 @@ const HandWritten = () => {
 
       <div>
         <h2>Predicted: {predictedLabel}</h2>
-        {predictionProb.map((prob, index) => (
-          <p>{index}: {prob}</p>
-        ))}
+        {/*{predictionProb.map((prob, index) => (*/}
+        {/*  <p>{index}: {prob}</p>*/}
+        {/*))}*/}
+        <Bar data={data} />
       </div>
     </div>
   )
