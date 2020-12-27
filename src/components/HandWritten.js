@@ -62,6 +62,13 @@ const HandWritten = () => {
     console.log(response)
   }
 
+  const handleReset = () => {
+    clearDrawing()
+
+    setPredictedLabel("")
+    setPredictionProb([])
+  }
+
   return(
     <div className={styles.wrapper}>
       <h1>Hand Written Recognition</h1>
@@ -78,15 +85,12 @@ const HandWritten = () => {
       />
 
       <div className={styles.buttons_wrapper}>
-        <button onClick={clearDrawing}>reset</button>
+        <button onClick={handleReset}>reset</button>
         <button onClick={predict}>predict</button>
       </div>
 
       <div>
         <h2>Predicted: {predictedLabel}</h2>
-        {/*{predictionProb.map((prob, index) => (*/}
-        {/*  <p>{index}: {prob}</p>*/}
-        {/*))}*/}
         <Bar data={data} />
       </div>
     </div>
