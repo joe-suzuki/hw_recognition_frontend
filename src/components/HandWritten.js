@@ -44,6 +44,19 @@ const HandWritten = () => {
     }]
   }
 
+  const options = {
+    scales:{
+      yAxes:[
+        {
+          ticks:{
+            min: 0,
+            max: 1
+          }
+        }
+      ]
+    }
+  }
+
   const startDrawing = () => {
     setDrawing(true)
 
@@ -124,7 +137,7 @@ const HandWritten = () => {
 
       <div>
         <h2>Predicted: {predictedLabel}</h2>
-        <Bar data={data} />
+        <Bar data={data} options={options}/>
       </div>
     </div>
   )
