@@ -114,7 +114,7 @@ const HandWritten = () => {
               checked={selectedModel===model}
               onChange={onSelectedModelChange}
             />
-            <lable>{model}</lable>
+            <label>{model}</label>
           </div>
         ))}
       </div>
